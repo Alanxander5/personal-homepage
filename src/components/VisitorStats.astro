@@ -1,0 +1,30 @@
+---
+---
+
+<span id="visitor-stats" class="text-xs text-stone-400">
+  PV -- · UV -- · 本页 --
+</span>
+
+<script>
+  async function fetchStats() {
+    try {
+      const resp = await fetch('https://bsz.saop.cc/api', {
+        method: 'POST',
+        headers: {
+          'x-bsz-referer': window.location.href,
+        },
+        credentials: 'include',
+      });
+      if (!resp.ok) throw new Error('Network response was not ok');
+      const json = await resp.json();
+      const el = document.getElementById('visitor-stats');
+      if (el && json.data) {
+        el.textContent = `PV ${json.data.site_pv} · UV ${json.data.site_uv} · 本页 ${json.data.page_pv}`;
+      }
+    } catch {
+      // silently fail, keep default display
+    }
+  }
+
+  fetchStats();
+</script>
