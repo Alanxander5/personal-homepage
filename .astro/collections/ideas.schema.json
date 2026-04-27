@@ -1,0 +1,69 @@
+{
+  "$ref": "#/definitions/ideas",
+  "definitions": {
+    "ideas": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "思考阶段",
+            "文献调研阶段",
+            "实验设计阶段",
+            "进行中",
+            "已搁置"
+          ]
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "低",
+            "中",
+            "高"
+          ]
+        },
+        "abstract": {
+          "type": "string"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "date",
+        "tags",
+        "status",
+        "confidence",
+        "abstract"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

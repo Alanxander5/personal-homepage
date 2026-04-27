@@ -1,0 +1,45 @@
+---
+title: "生态学研究生如何开始使用机器学习"
+date: 2026-04-01
+tags: ["机器学习", "入门", "scikit-learn"]
+difficulty: "入门"
+status: "草稿"
+abstract: "从简单的分类模型开始，介绍 scikit-learn 的基本用法，以及在生态学问题中应用机器学习的常见陷阱。"
+---
+
+从简单的分类模型开始，介绍 scikit-learn 的基本用法，以及在生态学问题中应用机器学习的常见陷阱。
+
+## 为什么生态学研究者要学机器学习
+
+生态学数据通常维度高、样本量有限、空间异质性强。机器学习可以帮助我们处理非线性关系，但也需要谨慎使用。
+
+## 从哪里开始
+
+### 1. Python 基础
+
+确保熟悉 pandas 和 numpy 的基本操作。
+
+### 2. scikit-learn 入门
+
+```python
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
+predictions = model.predict(X_test)
+```
+
+### 3. 常见模型
+
+- 随机森林（分类/回归）
+- 梯度提升树
+- 支持向量机
+
+## 生态学应用的常见陷阱
+
+1. **过拟合**：样本量小时容易发生
+2. **数据泄露**：训练集和测试集未正确划分
+3. **生态学意义缺失**：只关注预测精度而忽略解释
