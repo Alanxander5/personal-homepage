@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="首页">
+  <div class="max-w-5xl mx-auto px-6 py-16">
+    <section class="text-center py-20">
+      <h1 class="text-4xl md:text-5xl font-semibold text-stone-800 mb-6 leading-tight">
+        探索生态系统与<br class="hidden sm:block" />
+        智能方法的交叉研究
+      </h1>
+      <p class="text-xl text-stone-600 max-w-2xl mx-auto mb-8 leading-relaxed">
+        我关注生态系统过程、环境数据与人工智能方法的交叉研究，
+        致力于用计算工具理解自然系统的运行规律。
+      </p>
+      <div class="flex items-center justify-center gap-4 text-sm text-stone-500">
+        <span class="px-3 py-1 bg-forest-50 text-forest-600 rounded-full">生态学</span>
+        <span class="px-3 py-1 bg-deepblue-50 text-deepblue-600 rounded-full">计算机科学</span>
+        <span class="px-3 py-1 bg-stone-100 text-stone-600 rounded-full">人工智能</span>
+      </div>
+    </section>
+
+    <section class="grid md:grid-cols-3 gap-6 py-12">
+      <a href="/about" class="group p-6 bg-white rounded-xl border border-stone-200 hover:border-forest-200 hover:shadow-md transition-all">
+        <div class="text-3xl mb-4">👤</div>
+        <h2 class="text-lg font-medium text-stone-800 mb-2 group-hover:text-forest-600 transition-colors">关于我</h2>
+        <p class="text-sm text-stone-500">研究生阶段的学习与研究方向</p>
+      </a>
+
+      <a href="/research" class="group p-6 bg-white rounded-xl border border-stone-200 hover:border-forest-200 hover:shadow-md transition-all">
+        <div class="text-3xl mb-4">🔬</div>
+        <h2 class="text-lg font-medium text-stone-800 mb-2 group-hover:text-forest-600 transition-colors">研究方向</h2>
+        <p class="text-sm text-stone-500">消落带生态、土壤微生物与AI建模</p>
+      </a>
+
+      <a href="/tutorials" class="group p-6 bg-white rounded-xl border border-stone-200 hover:border-forest-200 hover:shadow-md transition-all">
+        <div class="text-3xl mb-4">📚</div>
+        <h2 class="text-lg font-medium text-stone-800 mb-2 group-hover:text-forest-600 transition-colors">教程笔记</h2>
+        <p class="text-sm text-stone-500">生态学数据处理与机器学习入门</p>
+      </a>
+    </section>
+
+    <section class="py-12">
+      <div class="bg-gradient-to-br from-forest-50 to-deepblue-50 rounded-2xl p-8 md:p-12">
+        <h2 class="text-2xl font-semibold text-stone-800 mb-4">近期思考</h2>
+        <p class="text-stone-600 leading-relaxed mb-6">
+          如何将大语言模型应用于生态学文献的结构化提取？
+          遥感数据与地面样点如何更好地结合来评估生态系统恢复效果？
+          这些问题正在探索中。
+        </p>
+        <a href="/ideas" class="inline-flex items-center text-forest-600 font-medium hover:text-forest-700 transition-colors">
+          查看想法库 →
+        </a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

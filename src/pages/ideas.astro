@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const ideas = [
+  {
+    id: 'llm-evidence-matrix',
+    title: '用大模型辅助生态学文献证据矩阵构建',
+    description: '系统综述中需要从大量文献中提取证据构建矩阵，这个过程耗时且容易出错。尝试用大语言模型辅助文献筛选和关键信息提取，提高综述的效率和覆盖度。',
+    tags: ['大语言模型', '文献综述', '知识提取'],
+    stage: '思考阶段',
+  },
+  {
+    id: 'remote-ground-flooding',
+    title: '用遥感和地面样点联合评估消落带植被恢复',
+    description: '三峡库区消落带的植被恢复效果评估需要在遥感大尺度分析和地面样点验证之间建立桥梁。探索如何联合卫星时序数据和野外调查数据，构建更可靠的恢复效果评估模型。',
+    tags: ['遥感', '消落带', '植被恢复', '联合建模'],
+    stage: '文献调研阶段',
+  },
+  {
+    id: 'microbial-nitrogen-phosphorus',
+    title: '用微生物功能基因解释氮磷削减机制',
+    description: '消落带植被对氮磷的拦截效果可能与土壤微生物的功能群组成密切相关。通过分析nirS、nirK、phoD等功能基因的丰度，尝试揭示微生物介导的氮磷循环机制。',
+    tags: ['微生物生态', '功能基因', '氮磷循环', '分子生态'],
+    stage: '实验设计阶段',
+  },
+];
+---
+
+<BaseLayout title="想法库" description="想法库 - 科研想法与研究思路">
+  <div class="max-w-5xl mx-auto px-6 py-16">
+    <h1 class="text-3xl font-semibold text-stone-800 mb-4">想法库</h1>
+    <p class="text-stone-600 mb-12 max-w-2xl">
+      记录一些研究过程中的想法和思路，有的尚在萌芽，有的已有初步计划。
+      这些想法会随着学习和实验的深入不断迭代。
+    </p>
+
+    <div class="space-y-6">
+      {ideas.map((idea, index) => (
+        <article class="bg-white rounded-xl border border-stone-200 p-6 hover:shadow-md transition-shadow">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="flex-shrink-0 w-8 h-8 bg-forest-50 text-forest-600 rounded-full flex items-center justify-center text-sm font-medium">
+              {index + 1}
+            </span>
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2">
+                <h2 class="text-xl font-medium text-stone-800">{idea.title}</h2>
+                <span class="px-2 py-0.5 bg-stone-100 text-stone-500 rounded text-xs">
+                  {idea.stage}
+                </span>
+              </div>
+              <p class="text-stone-600 leading-relaxed mb-4">
+                {idea.description}
+              </p>
+              <div class="flex flex-wrap gap-2">
+                {idea.tags.map((tag) => (
+                  <span class="px-2 py-0.5 bg-deepblue-50 text-deepblue-600 rounded text-xs">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <section class="mt-12 bg-stone-100 rounded-xl p-6">
+      <p class="text-sm text-stone-600">
+        <span class="font-medium text-stone-700">关于想法库：</span>
+        这些想法代表我当前的思考方向，不保证完全正确或可行。
+        随着文献阅读和实验推进，有些想法会被修正或放弃，新的想法也会不断加入。
+      </p>
+    </section>
+  </div>
+</BaseLayout>

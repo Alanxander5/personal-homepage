@@ -1,0 +1,39 @@
+---
+const navItems = [
+  { href: '/', label: '首页' },
+  { href: '/about', label: '关于' },
+  { href: '/research', label: '研究方向' },
+  { href: '/tutorials', label: '教程笔记' },
+  { href: '/ideas', label: '想法库' },
+  { href: '/now', label: '当前状态' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="bg-white/80 backdrop-blur-sm border-b border-stone-200 sticky top-0 z-50">
+  <div class="max-w-5xl mx-auto px-6 py-4">
+    <nav class="flex items-center justify-between">
+      <a href="/" class="text-xl font-semibold text-forest-600 hover:text-forest-700 transition-colors">
+        🌿 生态智能
+      </a>
+      <ul class="flex items-center gap-6 text-sm">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[
+                'px-2 py-1 rounded-md transition-colors',
+                currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
+                  ? 'text-forest-600 bg-forest-50 font-medium'
+                  : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
+              ]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>

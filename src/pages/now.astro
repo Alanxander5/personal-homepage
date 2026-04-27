@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const nowItems = [
+  {
+    icon: '🌊',
+    title: '三峡库区消落带实验设计',
+    description: '正在设计2026年夏季的消落带植被调查方案，包括样点布设、调查指标和数据记录规范。需要平衡科学目标与野外操作的可行性。',
+    progress: '方案设计阶段',
+  },
+  {
+    icon: '🧬',
+    title: '土壤微生物测序与功能基因学习',
+    description: '正在学习16S扩增子测序数据的分析方法，同时阅读氮磷循环相关的功能基因文献。为后续土壤微生物分析做准备。',
+    progress: '文献学习阶段',
+  },
+  {
+    icon: '🤖',
+    title: 'AI辅助生态学论文写作与数据建模',
+    description: '尝试将大语言模型用于文献阅读和初稿写作辅助，同时学习scikit-learn和PyTorch的基本用法，探索生态建模的可能性。',
+    progress: '工具学习阶段',
+  },
+];
+---
+
+<BaseLayout title="当前状态" description="当前状态 - 2026年第二季度聚焦">
+  <div class="max-w-5xl mx-auto px-6 py-16">
+    <h1 class="text-3xl font-semibold text-stone-800 mb-4">当前状态</h1>
+    <p class="text-stone-600 mb-4">
+      <strong>2026年第二季度（Q2）</strong> · 最后更新于 2026年4月
+    </p>
+    <p class="text-stone-500 mb-12 text-sm">
+      参考 Derek Willis 的 /now 页面理念
+    </p>
+
+    <div class="space-y-6">
+      {nowItems.map((item) => (
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="text-3xl">{item.icon}</span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-2">
+                <h2 class="text-xl font-medium text-stone-800">{item.title}</h2>
+                <span class="px-2 py-0.5 bg-forest-50 text-forest-600 rounded text-xs">
+                  {item.progress}
+                </span>
+              </div>
+              <p class="text-stone-600 leading-relaxed">
+                {item.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <section class="mt-12 bg-forest-50 rounded-xl p-6">
+      <h2 class="text-lg font-medium text-forest-800 mb-3">当前节奏</h2>
+      <ul class="space-y-2 text-stone-600 text-sm">
+        <li class="flex items-start gap-2">
+          <span class="text-forest-500">·</span>
+          <span>大部分时间在室内阅读文献和处理数据</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-forest-500">·</span>
+          <span>夏季会有集中的野外调查工作</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-forest-500">·</span>
+          <span>每周保持一定的代码实践和数据处理练习</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="mt-6 bg-stone-100 rounded-xl p-6">
+      <p class="text-sm text-stone-500">
+        这个页面反映的是我目前的关注重点，而非公开承诺。
+        研究工作的节奏会随着实验进展和发现而调整。
+      </p>
+    </section>
+  </div>
+</BaseLayout>

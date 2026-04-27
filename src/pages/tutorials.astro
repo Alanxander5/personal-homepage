@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const tutorials = [
+  {
+    title: '如何用 Python 整理生态学样点数据',
+    description: '从野外采集的Excel表格到规范化的数据框架，介绍pandas在生态学数据清洗中的常用操作。',
+    tag: 'Python · 数据处理',
+    status: '即将推出',
+  },
+  {
+    title: '16S 扩增子测序结果应该如何理解',
+    description: 'OTU、ASV、物种注释、Alpha多样性……这些常见指标的含义和局限，以及如何正确解读测序报告。',
+    tag: '分子生态学 · 测序分析',
+    status: '即将推出',
+  },
+  {
+    title: '生态学研究生如何开始使用机器学习',
+    description: '从简单的分类模型开始，介绍scikit-learn的基本用法，以及在生态学问题中应用机器学习的常见陷阱。',
+    tag: '机器学习 · 入门',
+    status: '即将推出',
+  },
+];
+---
+
+<BaseLayout title="教程笔记" description="教程笔记 - 生态学数据处理与计算方法">
+  <div class="max-w-5xl mx-auto px-6 py-16">
+    <h1 class="text-3xl font-semibold text-stone-800 mb-4">教程笔记</h1>
+    <p class="text-stone-600 mb-12 max-w-2xl">
+      整理学习和使用各种工具过程中的笔记，希望对后来者有所帮助。
+      内容仍在持续更新中。
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {tutorials.map((tutorial) => (
+        <article class="bg-white rounded-xl border border-stone-200 p-6 hover:shadow-md transition-shadow">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="px-2 py-0.5 bg-stone-100 text-stone-500 rounded text-xs">
+              {tutorial.status}
+            </span>
+          </div>
+          <h2 class="text-lg font-medium text-stone-800 mb-3 leading-snug">
+            {tutorial.title}
+          </h2>
+          <p class="text-sm text-stone-500 mb-4 leading-relaxed">
+            {tutorial.description}
+          </p>
+          <span class="text-xs text-forest-600 font-medium">
+            {tutorial.tag}
+          </span>
+        </article>
+      ))}
+    </div>
+
+    <section class="mt-12 bg-stone-100 rounded-xl p-6">
+      <p class="text-sm text-stone-600">
+        <span class="font-medium text-stone-700">说明：</span>
+        这些笔记基于我个人的学习经验整理，如有疏漏欢迎指正。
+        教程内容会随着我自身认知的提升而不断修正。
+      </p>
+    </section>
+  </div>
+</BaseLayout>

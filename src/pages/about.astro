@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="关于" description="关于我 - 研究生阶段的学习与研究方向">
+  <div class="max-w-5xl mx-auto px-6 py-16">
+    <h1 class="text-3xl font-semibold text-stone-800 mb-8">关于我</h1>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="md:col-span-2 space-y-6">
+        <section class="bg-white rounded-xl border border-stone-200 p-6">
+          <h2 class="text-lg font-medium text-stone-800 mb-4">个人简介</h2>
+          <div class="space-y-4 text-stone-600 leading-relaxed">
+            <p>
+              我是一名研究生，目前的研究方向聚焦于生态学与计算机科学的交叉领域。
+              在生态学方面，我关注三峡库区消落带的植被恢复与面源污染拦截问题，
+              以及土壤微生物群落与氮磷循环的关系。
+            </p>
+            <p>
+              在计算机科学方面，我尝试将机器学习和数据科学方法应用于生态学研究，
+              包括生态数据的建模分析、遥感数据的处理解读，以及AI辅助科研工具的使用。
+            </p>
+            <p>
+              目前仍在学习积累阶段，期望通过持续的阅读、实验和思考，
+              逐步建立起对生态计算领域的系统性理解。
+            </p>
+          </div>
+        </section>
+
+        <section class="bg-white rounded-xl border border-stone-200 p-6">
+          <h2 class="text-lg font-medium text-stone-800 mb-4">教育背景</h2>
+          <ul class="space-y-3 text-stone-600">
+            <li class="flex items-start gap-3">
+              <span class="text-forest-500 mt-1">●</span>
+              <div>
+                <p class="font-medium text-stone-700">硕士研究生</p>
+                <p class="text-sm">生态学专业 · 生态智能方向</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="bg-white rounded-xl border border-stone-200 p-6">
+          <h2 class="text-lg font-medium text-stone-800 mb-4">技能兴趣</h2>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-stone-100 text-stone-700 rounded-full text-sm">Python</span>
+            <span class="px-3 py-1 bg-stone-100 text-stone-700 rounded-full text-sm">R语言</span>
+            <span class="px-3 py-1 bg-stone-100 text-stone-700 rounded-full text-sm">QGIS</span>
+            <span class="px-3 py-1 bg-stone-100 text-stone-700 rounded-full text-sm">机器学习</span>
+            <span class="px-3 py-1 bg-stone-100 text-stone-700 rounded-full text-sm">遥感数据处理</span>
+            <span class="px-3 py-1 bg-stone-100 text-stone-700 rounded-full text-sm">16S扩增子分析</span>
+          </div>
+        </section>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <h2 class="text-lg font-medium text-stone-800 mb-4">联系方式</h2>
+          <ul class="space-y-3 text-sm text-stone-600">
+            <li>
+              <span class="text-stone-400">邮箱：</span>
+              <a href="mailto:your.email@example.com" class="text-forest-600 hover:text-forest-700">
+                your.email@example.com
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <h2 class="text-lg font-medium text-stone-800 mb-4">所在地点</h2>
+          <p class="text-sm text-stone-600">
+            中国 · 湖北<br />
+            长江三峡库区附近
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

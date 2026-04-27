@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const researchAreas = [
+  {
+    id: 'wlz',
+    title: '三峡库区消落带与面源污染拦截',
+    icon: '🌊',
+    description: '研究三峡库区周期性水位涨落形成的消落带生态系统，探讨植被恢复对氮磷等面源污染的拦截效果与机制。',
+    keywords: ['消落带', '面源污染', '植被恢复', '氮磷拦截'],
+  },
+  {
+    id: 'soil-microbe',
+    title: '土壤微生物与氮磷循环',
+    icon: '🌱',
+    description: '通过16S扩增子测序等手段分析土壤微生物群落结构，理解微生物功能基因在氮磷循环中的作用机制。',
+    keywords: ['土壤微生物', '氮循环', '磷循环', '16S rRNA'],
+  },
+  {
+    id: 'ai-ecology',
+    title: 'AI for Ecology / 生态数据建模',
+    icon: '🤖',
+    description: '探索机器学习、深度学习在生态学数据建模中的应用，包括物种分布预测、生态系统服务评估等。',
+    keywords: ['机器学习', '生态建模', '数据科学', 'Python'],
+  },
+  {
+    id: 'remote-sensing',
+    title: '遥感与环境监测',
+    icon: '🛰️',
+    description: '利用遥感数据监测生态环境变化，结合地面样点数据进行尺度转换与模型验证。',
+    keywords: ['遥感', 'GEE', '植被指数', '环境监测'],
+  },
+];
+---
+
+<BaseLayout title="研究方向" description="研究方向 - 生态学与人工智能的交叉研究">
+  <div class="max-w-5xl mx-auto px-6 py-16">
+    <h1 class="text-3xl font-semibold text-stone-800 mb-4">研究方向</h1>
+    <p class="text-stone-600 mb-12 max-w-2xl">
+      当前研究聚焦于生态学与计算方法的交叉领域，主要关注三峡库区消落带生态系统、
+      土壤微生物过程，以及人工智能方法在生态学研究中的应用。
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      {researchAreas.map((area) => (
+        <div id={area.id} class="bg-white rounded-xl border border-stone-200 p-6 hover:shadow-md transition-shadow">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="text-3xl">{area.icon}</span>
+            <h2 class="text-xl font-medium text-stone-800 pt-1">{area.title}</h2>
+          </div>
+          <p class="text-stone-600 mb-4 leading-relaxed">
+            {area.description}
+          </p>
+          <div class="flex flex-wrap gap-2">
+            {area.keywords.map((kw) => (
+              <span class="px-2 py-0.5 bg-stone-100 text-stone-500 rounded text-xs">
+                {kw}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <section class="mt-12 bg-forest-50 rounded-xl p-6">
+      <h2 class="text-lg font-medium text-forest-800 mb-3">研究立场</h2>
+      <p class="text-stone-600 text-sm leading-relaxed">
+        我相信生态学与数据科学的结合能够帮助我们更好地理解自然系统的复杂性。
+        但技术工具终究是手段，生态学问题的本质还是需要回到对自然过程的理解上。
+        我倾向于在扎实的野外工作和实验设计基础上，谨慎地引入计算方法。
+      </p>
+    </section>
+  </div>
+</BaseLayout>
