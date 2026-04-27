@@ -4,6 +4,5 @@ import mdx from '@astrojs/mdx';
 
 export default defineConfig({
   integrations: [tailwind(), mdx()],
-  site: 'https://alanxander5.github.io',
-  base: '/personal-homepage',
+  site: 'https://lab.xiaolan.monster',
 });
