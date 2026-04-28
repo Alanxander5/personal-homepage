@@ -2,64 +2,57 @@
 
 基于 Astro 构建的静态网站，用于展示个人研究方向和学术笔记。
 
+**线上地址**: https://lab.xiaolan.monster/
+
 ## 技术栈
 
 - **框架**: Astro 5.x
 - **样式**: Tailwind CSS
 - **语言**: TypeScript
-- **内容**: Markdown/MDX
+- **内容**: Markdown/MDX + Astro Content Collections
 
 ## 快速开始
 
-### 安装依赖
-
 ```bash
+# 安装依赖
 npm install
-```
 
-### 本地开发
-
-```bash
+# 本地开发
 npm run dev
-```
 
-访问 http://localhost:4321 查看网站。
-
-### 构建生产版本
-
-```bash
+# 构建生产版本
 npm run build
-```
 
-构建产物会输出到 `dist/` 目录。
-
-### 预览构建结果
-
-```bash
+# 预览构建结果
 npm run preview
 ```
 
 ## 项目结构
 
 ```
-├── public/                 # 静态资源
-│   └── favicon.svg        # 网站图标
+├── public/
+│   └── favicon.svg
 ├── src/
-│   ├── components/         # Astro 组件
+│   ├── components/
 │   │   ├── Header.astro
-│   │   └── Footer.astro
-│   ├── layouts/           # 页面布局
+│   │   ├── Footer.astro
+│   │   └── VisitorStats.astro
+│   ├── content/
+│   │   ├── config.ts
+│   │   ├── tutorials/
+│   │   └── ideas/
+│   ├── layouts/
 │   │   └── BaseLayout.astro
-│   └── pages/             # 页面
-│       ├── index.astro    # 首页
-│       ├── about.astro    # 关于
-│       ├── research.astro # 研究方向
-│       ├── tutorials.astro # 教程笔记
-│       ├── ideas.astro    # 想法库
-│       └── now.astro      # 当前状态
-├── astro.config.mjs       # Astro 配置
-├── tailwind.config.mjs    # Tailwind 配置
-└── tsconfig.json          # TypeScript 配置
+│   └── pages/
+│       ├── index.astro
+│       ├── about.astro
+│       ├── research.astro
+│       ├── tutorials.astro
+│       ├── ideas.astro
+│       └── now.astro
+├── astro.config.mjs
+├── tailwind.config.mjs
+└── tsconfig.json
 ```
 
 ## 页面说明
@@ -71,58 +64,36 @@ npm run preview
 | 研究方向 | `/research` | 四个主要研究方向 |
 | 教程笔记 | `/tutorials` | 学习过程中的技术笔记 |
 | 想法库 | `/ideas` | 科研想法与思路 |
-| 当前状态 | `/now` | 2026 Q2 聚焦方向 |
+| 当前状态 | `/now` | 当前工作重点 |
 
-## 部署到 GitHub Pages
+## 部署说明
 
-1. 修改 `astro.config.mjs` 中的 `site` 和 `base` 配置：
+网站通过 GitHub Actions 自动部署到 GitHub Pages，使用自定义域名 `lab.xiaolan.monster`。
 
-```js
-export default defineConfig({
-  site: 'https://yourusername.github.io',
-  base: '/personal-homepage',  // 改为你的仓库名
-});
-```
+部署配置位于 `.github/workflows/deploy.yml`，推送到 main 分支后自动触发。
 
-2. 使用 GitHub Actions 自动部署，创建 `.github/workflows/deploy.yml`:
+⚠️ **注意**: `astro.config.mjs` 已正确配置自定义域名，无需修改。如需调整域名，请先阅读 `docs/PROJECT_STATE.md` 中的警告。
 
-```yaml
-name: Deploy to GitHub Pages
+## 文档
 
-on:
-  push:
-    branches: [main]
+- [项目状态文档](docs/PROJECT_STATE.md) — 项目当前状态、技术栈、已完成功能
+- [Agent 交接文档](docs/AGENT_HANDOFF.md) — 面向未来接手的 AI Agent
+- [关键决策记录](docs/DECISIONS.md) — 历史决策及原因
+- [更新日志](CHANGELOG.md) — 版本变更记录
+- [任务路线图](TODO.md) — 未来任务规划
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
+## 内容系统
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/deploy-pages@v4
-```
+Tutorials 和 Ideas 已迁移到 Astro Content Collections，添加新内容需在对应目录创建 `.mdx` 文件：
 
-3. 推送代码到 main 分支，等待 GitHub Actions 自动部署。
+- 教程: `src/content/tutorials/`
+- 想法: `src/content/ideas/`
 
-## 联系方式
+Schema 定义位于 `src/content/config.ts`。
 
-如有问题，欢迎通过项目仓库提交 Issue。
+## 注意事项
+
+- 不要虚构论文、基金、奖项
+- 不要把主页写成成熟 PI 或课题组官网
+- 不要在内容不足时添加 Pagefind、Giscus 等功能
+- 不要提交 `.astro/` 构建缓存到 git
