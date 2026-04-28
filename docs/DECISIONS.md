@@ -12,7 +12,7 @@
   - 根域名 xiaolan.monster 保留用于其他用途（简历、作品集等）
   - 子域名 lab. 可以明确标识这是科研/实验室相关内容
   - 如果未来需要，可以将根域名重定向到 lab.
-- **Consequence**: 所有 Astro 配置直接使用 site: 'https://lab.xiaolan.monster'，无需 base path
+- **Consequence**: 所有 Astro 配置直接使用 site: 'https://lab.xiaolan.monster'，无需 base path；当前仓库没有 public/CNAME
 
 ---
 
@@ -26,7 +26,8 @@
   - 添加 base 会导致所有资源路径错误（/personal-homepage/xxx）
 - **Consequence**:
   - astro.config.mjs 保持 `site: 'https://lab.xiaolan.monster'`，无 base
-  - CNAME 配置在 GitHub Pages 仓库设置中，而非 public/ 目录
+  - **当前仓库没有 `public/CNAME` 文件**，CNAME 通过 GitHub 仓库 Settings > Pages 配置
+  - 不要因为看不到 public/CNAME 就自动创建它
 
 ---
 

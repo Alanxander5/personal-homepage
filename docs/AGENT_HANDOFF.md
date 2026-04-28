@@ -34,6 +34,8 @@ npm run build
 6. `TODO.md` — 未来任务路线图
 7. `astro.config.mjs` — 确认域名配置（无 base path）
 8. `src/content/config.ts` — Content Collections schema
+9. `package.json` — 依赖版本和 scripts
+10. `.gitignore` — 已忽略的文件类型
 
 ## 新 Agent 接手后必须运行的命令
 
@@ -44,10 +46,13 @@ git status
 # 2. 查看最近提交记录
 git log --oneline --decorate -n 10
 
-# 3. 确认项目能正常构建
+# 3. 安装依赖（使用 npm ci 确保与 lockfile 一致）
+npm ci
+
+# 4. 确认项目能正常构建
 npm run build
 
-# 4. 如需本地预览
+# 5. 如需本地预览
 npm run dev
 ```
 
@@ -73,10 +78,13 @@ npm run dev
 | 添加多语言 | 中文主页，暂无英文化需求 |
 | 添加动画 | 学术风格保持简洁 |
 | 修改 astro.config.mjs | base path 和 site 配置已就绪 |
-| 修改 public/CNAME | 域名配置在 GitHub Pages 设置中 |
+| 修改 public/CNAME | 当前仓库没有此文件，域名在 GitHub Pages 设置中 |
 | 重写页面文案为 PI 风格 | 定位是研究生，不是成熟学者 |
 | 虚构论文/项目/奖项 | 保持真实克制 |
 | 提交 .astro/ 到 git | 那是构建缓存 |
+| 提交 dist/ 到 git | 那是构建产物 |
+| 提交 node_modules/ 到 git | 那是依赖目录 |
+| 提交 .codex/ 到 git | 那是本地工具缓存 |
 | 大重构工程结构 | 当前结构已满足需求 |
 
 ## 推荐任务流程

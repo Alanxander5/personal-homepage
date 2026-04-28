@@ -5,7 +5,7 @@
 - **项目名称**: personal-homepage
 - **线上地址**: https://lab.xiaolan.monster/
 - **GitHub 仓库**: https://github.com/Alanxander5/personal-homepage
-- **当前版本**: v0.3.x (Visitor Stats 已上线)
+- **当前版本**: v0.3.2-agent-handoff
 - **最后更新**: 2026-04-28
 
 ## 技术栈
@@ -29,7 +29,8 @@
 ⚠️ **重要警告**：
 - 使用 `lab.xiaolan.monster` 自定义域名后，`astro.config.mjs` 中**没有设置 `base` 路径**
 - 不要重新添加 `base: '/personal-homepage'`，这会导致部署后路径错误
-- CNAME 文件不在 `public/` 目录中，域名配置在 GitHub 仓库 Settings > Pages 中
+- **当前仓库没有 `public/CNAME` 文件**，自定义域名通过 GitHub 仓库 Settings > Pages 中的 CNAME 设置配置
+- **不要随意新建 `public/CNAME`**，除非重新设计部署方式
 
 ## 已完成功能
 

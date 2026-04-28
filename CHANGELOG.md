@@ -4,9 +4,36 @@
 
 ---
 
-## [Unreleased] Next Version
+## [Unreleased]
 
-*暂无未发布的变更*
+*暂无未发布的变更。当前 HEAD 已包含 v0.3.2 的所有内容。*
+
+---
+
+## [v0.3.2] Agent Handoff
+
+发布于 2026-04-28
+
+### Added
+- `docs/PROJECT_STATE.md` — 项目状态文档
+- `docs/AGENT_HANDOFF.md` — AI Agent 交接文档
+- `docs/DECISIONS.md` — 关键决策记录
+- `CHANGELOG.md` — 版本变更记录
+- `TODO.md` — 任务路线图
+
+### Changed
+- `README.md` — 更新文档入口，删除过时 base path 部署说明
+
+### Fixed
+- 从 Git 跟踪中移除 `.astro/` 构建缓存文件
+- 添加 `.codex/` 到 `.gitignore`
+- 统一 package.json、CHANGELOG、PROJECT_STATE 的版本口径为 v0.3.2
+- 修正文档中关于 public/CNAME 的不准确表述
+
+### Notes
+- 当前仓库没有 `public/CNAME` 文件
+- 自定义域名 `lab.xiaolan.monster` 通过 GitHub Pages 仓库设置配置
+- 不要因为看不到 public/CNAME 就自动创建它
 
 ---
 
