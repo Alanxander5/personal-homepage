@@ -7,6 +7,8 @@
 - **GitHub 仓库**: https://github.com/Alanxander5/personal-homepage
 - **当前版本**: v0.3.2-agent-handoff
 - **最后更新**: 2026-04-28
+- **npm version**: `0.3.2-agent-handoff` (package.json uses npm-compatible semver string)
+- **Git tag**: `v0.3.2-agent-handoff`
 
 ## 技术栈
 

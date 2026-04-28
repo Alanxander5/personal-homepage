@@ -32,4 +32,7 @@ yarn-error.log*
 .cache/
 
 # Local tool directories
+.codex
 .codex/
+.claude/settings.local.json
+.claude/*.local.json

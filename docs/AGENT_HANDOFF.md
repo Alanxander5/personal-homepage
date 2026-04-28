@@ -84,7 +84,10 @@ npm run dev
 | 提交 .astro/ 到 git | 那是构建缓存 |
 | 提交 dist/ 到 git | 那是构建产物 |
 | 提交 node_modules/ 到 git | 那是依赖目录 |
+| 提交 .codex 到 git | 那是本地工具缓存 |
 | 提交 .codex/ 到 git | 那是本地工具缓存 |
+| 提交 .claude/settings.local.json 到 git | 那是本地工具配置 |
+| 提交 .claude/*.local.json 到 git | 那是本地工具配置 |
 | 大重构工程结构 | 当前结构已满足需求 |
 
 ## 推荐任务流程
