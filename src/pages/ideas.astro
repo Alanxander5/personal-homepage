@@ -23,31 +23,35 @@ const sortedByStage = [...sortedIdeas].sort((a, b) => {
 
     <div class="space-y-6">
       {sortedByStage.map((idea, index) => (
-        <article class="bg-white rounded-xl border border-stone-200 p-6 hover:shadow-md transition-shadow">
-          <div class="flex items-start gap-4 mb-4">
-            <span class="flex-shrink-0 w-8 h-8 bg-forest-50 text-forest-600 rounded-full flex items-center justify-center text-sm font-medium">
-              {index + 1}
-            </span>
-            <div class="flex-1">
-              <div class="flex items-center gap-3 mb-2">
-                <h2 class="text-xl font-medium text-stone-800">{idea.data.title}</h2>
-                <span class="px-2 py-0.5 bg-stone-100 text-stone-500 rounded text-xs">
-                  {idea.data.status}
-                </span>
-              </div>
-              <p class="text-stone-600 leading-relaxed mb-4">
-                {idea.data.abstract}
-              </p>
-              <div class="flex flex-wrap gap-2">
-                {idea.data.tags.map((tag) => (
-                  <span class="px-2 py-0.5 bg-deepblue-50 text-deepblue-600 rounded text-xs">
-                    {tag}
+        <a href={`/ideas/${idea.slug}`} class="block group">
+          <article class="bg-white rounded-xl border border-stone-200 p-6 hover:shadow-md transition-shadow">
+            <div class="flex items-start gap-4 mb-4">
+              <span class="flex-shrink-0 w-8 h-8 bg-forest-50 text-forest-600 rounded-full flex items-center justify-center text-sm font-medium">
+                {index + 1}
+              </span>
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <h2 class="text-xl font-medium text-stone-800 group-hover:text-forest-600 transition-colors">
+                    {idea.data.title}
+                  </h2>
+                  <span class="px-2 py-0.5 bg-stone-100 text-stone-500 rounded text-xs">
+                    {idea.data.status}
                   </span>
-                ))}
+                </div>
+                <p class="text-stone-600 leading-relaxed mb-4">
+                  {idea.data.abstract}
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  {idea.data.tags.map((tag) => (
+                    <span class="px-2 py-0.5 bg-deepblue-50 text-deepblue-600 rounded text-xs">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </article>
+          </article>
+        </a>
       ))}
     </div>
 

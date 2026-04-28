@@ -1,7 +1,7 @@
 {
   "name": "personal-research-homepage",
   "type": "module",
-  "version": "0.3.2-agent-handoff",
+  "version": "0.4.0-article-pages",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

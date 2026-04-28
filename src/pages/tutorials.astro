@@ -18,33 +18,35 @@ const sortedTutorials = tutorials.sort(
 
     <div class="grid md:grid-cols-3 gap-6">
       {sortedTutorials.map((tutorial) => (
-        <article class="bg-white rounded-xl border border-stone-200 p-6 hover:shadow-md transition-shadow">
-          <div class="flex items-center gap-2 mb-3">
-            <span class={`px-2 py-0.5 rounded text-xs ${
-              tutorial.data.status === '已完成' ? 'bg-forest-50 text-forest-600' :
-              tutorial.data.status === '更新中' ? 'bg-deepblue-50 text-deepblue-600' :
-              'bg-stone-100 text-stone-500'
-            }`}>
-              {tutorial.data.status}
-            </span>
-            <span class="px-2 py-0.5 bg-stone-100 text-stone-500 rounded text-xs">
-              {tutorial.data.difficulty}
-            </span>
-          </div>
-          <h2 class="text-lg font-medium text-stone-800 mb-3 leading-snug">
-            {tutorial.data.title}
-          </h2>
-          <p class="text-sm text-stone-500 mb-4 leading-relaxed">
-            {tutorial.data.abstract}
-          </p>
-          <div class="flex flex-wrap gap-1">
-            {tutorial.data.tags.map((tag) => (
-              <span class="text-xs text-forest-600">
-                {tag}
+        <a href={`/tutorials/${tutorial.slug}`} class="block group">
+          <article class="bg-white rounded-xl border border-stone-200 p-6 hover:shadow-md transition-shadow h-full">
+            <div class="flex items-center gap-2 mb-3">
+              <span class={`px-2 py-0.5 rounded text-xs ${
+                tutorial.data.status === '已完成' ? 'bg-forest-50 text-forest-600' :
+                tutorial.data.status === '更新中' ? 'bg-deepblue-50 text-deepblue-600' :
+                'bg-stone-100 text-stone-500'
+              }`}>
+                {tutorial.data.status}
               </span>
-            ))}
-          </div>
-        </article>
+              <span class="px-2 py-0.5 bg-stone-100 text-stone-500 rounded text-xs">
+                {tutorial.data.difficulty}
+              </span>
+            </div>
+            <h2 class="text-lg font-medium text-stone-800 mb-3 leading-snug group-hover:text-forest-600 transition-colors">
+              {tutorial.data.title}
+            </h2>
+            <p class="text-sm text-stone-500 mb-4 leading-relaxed">
+              {tutorial.data.abstract}
+            </p>
+            <div class="flex flex-wrap gap-1">
+              {tutorial.data.tags.map((tag) => (
+                <span class="text-xs text-forest-600">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </article>
+        </a>
       ))}
     </div>
 

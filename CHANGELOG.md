@@ -6,7 +6,26 @@
 
 ## [Unreleased]
 
-*暂无未发布的变更。当前 HEAD 已包含 v0.3.2-agent-handoff 的所有内容。*
+*暂无未发布的变更。当前 HEAD 已包含 v0.4.0-article-pages 的所有内容。*
+
+---
+
+## [v0.4.0-article-pages]
+
+发布于 2026-04-28
+
+### Added
+- Added dynamic article detail pages for Tutorials.
+- Added dynamic article detail pages for Ideas.
+- Added static route generation for all tutorial and idea MDX entries.
+
+### Changed
+- Made Tutorials list cards link to individual article pages.
+- Made Ideas list cards link to individual idea pages.
+
+### Notes
+- The site now builds 12 static pages instead of 6.
+- Search and comments are still intentionally deferred.
 
 ---
 

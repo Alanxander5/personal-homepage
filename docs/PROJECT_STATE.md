@@ -5,10 +5,10 @@
 - **项目名称**: personal-homepage
 - **线上地址**: https://lab.xiaolan.monster/
 - **GitHub 仓库**: https://github.com/Alanxander5/personal-homepage
-- **当前版本**: v0.3.2-agent-handoff
+- **当前版本**: v0.4.0-article-pages
 - **最后更新**: 2026-04-28
-- **npm version**: `0.3.2-agent-handoff` (package.json uses npm-compatible semver string)
-- **Git tag**: `v0.3.2-agent-handoff`
+- **npm version**: `0.4.0-article-pages` (package.json uses npm-compatible semver string)
+- **Git tag**: `v0.4.0-article-pages`
 
 ## 技术栈
 
@@ -41,6 +41,7 @@
 3. ✅ 页面文案可信化 (v0.2)
 4. ✅ Tutorials 和 Ideas 迁移为 Content Collections (v0.3)
 5. ✅ 页脚访问统计小栏 (v0.3.1)
+6. ✅ Tutorials 和 Ideas 动态详情页 (v0.4)
 
 ## 当前页面结构
 
@@ -49,8 +50,10 @@
 | 首页 | `src/pages/index.astro` | 定位、研究兴趣导航 |
 | 关于 | `src/pages/about.astro` | 研究生身份、计算方法兴趣 |
 | 研究方向 | `src/pages/research.astro` | 四个方向：消落带、微生物、建模、遥感 |
-| 教程笔记 | `src/pages/tutorials.astro` | 从 Content Collections 读取 |
-| 想法库 | `src/pages/ideas.astro` | 从 Content Collections 读取 |
+| 教程笔记 | `src/pages/tutorials.astro` | 从 Content Collections 读取，卡片可点击 |
+| 教程详情 | `src/pages/tutorials/[slug].astro` | 动态路由，渲染 MDX 正文 |
+| 想法库 | `src/pages/ideas.astro` | 从 Content Collections 读取，卡片可点击 |
+| 想法详情 | `src/pages/ideas/[slug].astro` | 动态路由，渲染 MDX 正文 |
 | 当前状态 | `src/pages/now.astro` | Q2 工作重点 |
 
 ## 当前内容系统结构

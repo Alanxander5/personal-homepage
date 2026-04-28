@@ -36,6 +36,8 @@ npm run build
 8. `src/content/config.ts` — Content Collections schema
 9. `package.json` — 依赖版本和 scripts
 10. `.gitignore` — 已忽略的文件类型
+11. `src/pages/tutorials/[slug].astro` — Tutorials 详情页路由
+12. `src/pages/ideas/[slug].astro` — Ideas 详情页路由
 
 ## 新 Agent 接手后必须运行的命令
 
