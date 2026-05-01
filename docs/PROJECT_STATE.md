@@ -64,7 +64,9 @@
 
 - Playground 是低风险试验区，用于放置与科研主页无直接关系的小型前端实验
 - Playground 内容不代表科研成果，不应包装成 Research / Tutorials / Ideas 内容
-- 提醒起床小助手使用 UTC+8 / China Standard Time
+- 提醒起床小助手是 Playground 娱乐小实验
+- 雁栖湖时间是用户自定义时间设定
+- 不要按真实时区逻辑重写这个页面
 
 ## 当前内容系统结构
 

@@ -18,7 +18,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <p class="text-sm text-forest-600 font-medium mb-3">提醒起床小助手</p>
       <h1 class="text-3xl font-semibold text-stone-800 mb-4">提醒起床小助手</h1>
       <p class="text-stone-600 max-w-2xl leading-relaxed">
-        一个用于提醒自己规律作息和按时起床的小实验页面，保留动态时钟与轻微粒子背景。
+        一个提醒自己早点起床的小实验页面，保留动态时钟、轻微粒子背景和全屏显示。
       </p>
     </header>
 
@@ -45,7 +45,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
       <div class="clock-content relative z-10 min-h-[520px] flex flex-col items-center justify-center px-6 pb-16 pt-24 text-center">
         <p class="mb-6 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs text-forest-100">
-          提醒起床小助手 · UTC+8
+          雁栖湖时间 · UTC+8
         </p>
 
         <div class="clock-face flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 text-stone-50">
@@ -73,7 +73,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div class="bg-white rounded-xl border border-stone-200 p-6">
         <h2 class="text-lg font-medium text-stone-800 mb-3">关于这个时间</h2>
         <p class="text-sm text-stone-600 leading-relaxed">
-          当前显示为东八区时间，即 UTC+8 / China Standard Time，用来帮助自己关注作息节奏。
+          一个提醒自己早点起床的小实验页面。雁栖湖时间是这里的个人设定，用来把一天稍微往前拨一点。
           时钟区域支持全屏显示，适合在桌面或移动设备上作为临时提醒屏幕使用。
         </p>
       </div>
@@ -107,7 +107,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   const stage = document.querySelector('[data-wakeup-clock]');
 
   if (stage) {
-    const UTC_OFFSET_HOURS = 8;
+    const YANQI_TIME_OFFSET_HOURS = 11;
     const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
     const hoursEl = stage.querySelector('[data-clock-hours]');
     const minutesEl = stage.querySelector('[data-clock-minutes]');
@@ -127,10 +127,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     let originalBodyOverflow = '';
     let particles = [];
 
-    function getChinaStandardTime() {
+    function getYanqiLakeTime() {
       const now = new Date();
       const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-      return new Date(utc + UTC_OFFSET_HOURS * 3600000);
+      return new Date(utc + YANQI_TIME_OFFSET_HOURS * 3600000);
     }
 
     function pad(value) {
@@ -138,7 +138,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
 
     function updateClock() {
-      const time = getChinaStandardTime();
+      const time = getYanqiLakeTime();
       const hours = pad(time.getHours());
       const minutes = pad(time.getMinutes());
       const seconds = pad(time.getSeconds());

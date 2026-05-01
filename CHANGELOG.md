@@ -22,8 +22,9 @@
 - Improved the Playground wake-up helper interaction while keeping it outside the main research content structure.
 
 ### Notes
-- The page remains a small Playground experiment.
-- The next main task remains real content writing.
+- Yanqi Lake Time is a playful personal time setting for the wake-up helper.
+- The clock intentionally follows the user-defined wake-up helper behavior.
+- The page remains a Playground experiment, not a formal timekeeping tool.
 
 ---
 
@@ -38,7 +39,7 @@
 ### Changed
 - Adapted the previous clock experiment into a wake-up reminder helper.
 - Updated page naming from Yanqi Lake Clock to 提醒起床小助手.
-- Updated the displayed time logic to China Standard Time / UTC+8.
+- Updated the displayed time behavior for the wake-up helper.
 
 ### Notes
 - The page remains outside Research, Tutorials, and Ideas.
