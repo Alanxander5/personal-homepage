@@ -2,6 +2,8 @@
 
 本文档面向未来接手此项目的 AI Agent（Claude Code / Kimi Code / Codex 等）。
 
+当前版本：v0.4.2-wakeup-fullscreen
+
 ## 新会话启动提示词
 
 当你在一个新会话中接手这个项目时，请先复制并执行以下步骤：
@@ -94,6 +96,7 @@ npm run dev
 | 提交 .claude/*.local.json 到 git | 那是本地工具配置 |
 | 大重构工程结构 | 当前结构已满足需求 |
 | 让 Playground 页面污染主站全局样式 | 小实验必须局部封装，不应改全站 body 样式 |
+| 让 Playground 全屏样式污染全站布局 | 全屏样式必须限定在提醒起床小助手页面局部 |
 | 把 Playground 内容包装成科研成果 | Playground 是低优先级前端实验区 |
 | 修改提醒起床小助手时区前不确认需求 | 提醒起床小助手当前使用 UTC+8 / China Standard Time |
 

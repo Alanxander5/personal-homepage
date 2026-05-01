@@ -6,7 +6,24 @@
 
 ## [Unreleased]
 
-*暂无未发布的变更。当前工作版本为 v0.4.1-wakeup-helper。*
+*暂无未发布的变更。当前工作版本为 v0.4.2-wakeup-fullscreen。*
+
+---
+
+## [v0.4.2-wakeup-fullscreen]
+
+发布于 2026-05-01
+
+### Added
+- Added fullscreen mode for the wake-up helper clock.
+- Added mobile-friendly fullscreen layout for the clock display.
+
+### Changed
+- Improved the Playground wake-up helper interaction while keeping it outside the main research content structure.
+
+### Notes
+- The page remains a small Playground experiment.
+- The next main task remains real content writing.
 
 ---
 

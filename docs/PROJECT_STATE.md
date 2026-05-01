@@ -5,9 +5,9 @@
 - **项目名称**: personal-homepage
 - **线上地址**: https://lab.xiaolan.monster/
 - **GitHub 仓库**: https://github.com/Alanxander5/personal-homepage
-- **当前版本**: v0.4.1-wakeup-helper
+- **当前版本**: v0.4.2-wakeup-fullscreen
 - **最后更新**: 2026-05-01
-- **npm version**: `0.4.1-wakeup-helper` (package.json uses npm-compatible semver string)
+- **npm version**: `0.4.2-wakeup-fullscreen` (package.json uses npm-compatible semver string)
 - **Git tag**: not created in this working tree
 
 ## 技术栈
@@ -43,6 +43,7 @@
 5. ✅ 页脚访问统计小栏 (v0.3.1)
 6. ✅ Tutorials 和 Ideas 动态详情页 (v0.4)
 7. ✅ Playground / 提醒起床小助手 (v0.4.1)
+8. ✅ Playground / 提醒起床小助手支持全屏模式 (v0.4.2)
 
 ## 当前页面结构
 
@@ -57,7 +58,7 @@
 | 想法详情 | `src/pages/ideas/[slug].astro` | 动态路由，渲染 MDX 正文 |
 | 当前状态 | `src/pages/now.astro` | Q2 工作重点 |
 | Playground | `src/pages/playground.astro` | 低风险小型网页试验区 |
-| 提醒起床小助手 | `src/pages/playground/yanqi-clock.astro` | 规律作息提醒与动态时钟小实验 |
+| 提醒起床小助手 | `src/pages/playground/yanqi-clock.astro` | 规律作息提醒与动态时钟小实验，支持时钟区域全屏显示 |
 
 ## Playground 说明
 

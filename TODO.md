@@ -6,10 +6,11 @@
 
 ## Recent Updates
 
+- [x] v0.4.2-wakeup-fullscreen：提醒起床小助手支持全屏模式
 - [x] v0.4.1-wakeup-helper：新增 Playground 提醒起床小助手页面
 - [x] Playground clock is an entertainment / front-end experiment, not a research output
 
-**说明**：Playground is a low-priority experimental section; the next main task remains first real content article.
+**说明**：Playground is a low-priority experimental section; the next main task remains first real content article. 后续主线仍然是 Real Content，不要继续沉迷前端小功能。
 
 ---
 
@@ -85,3 +86,4 @@
 - [x] v0.3.2 — 交接文档基线
 - [x] v0.4.0 — 文章详情页（Tutorials / Ideas 动态路由）
 - [x] v0.4.1-wakeup-helper — Playground / 提醒起床小助手（低优先级前端实验）
+- [x] v0.4.2-wakeup-fullscreen — 提醒起床小助手支持全屏模式

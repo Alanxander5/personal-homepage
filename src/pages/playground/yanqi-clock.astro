@@ -33,7 +33,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         aria-hidden="true"
       ></canvas>
 
-      <div class="relative z-10 min-h-[520px] flex flex-col items-center justify-center px-6 py-16 text-center">
+      <button
+        type="button"
+        class="fullscreen-toggle absolute right-4 top-4 z-20 inline-flex min-h-11 items-center justify-center rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-stone-50 shadow-sm transition-colors hover:bg-white/15 focus-visible:outline-none"
+        data-fullscreen-toggle
+        aria-label="进入全屏显示时钟区域"
+        aria-pressed="false"
+      >
+        进入全屏
+      </button>
+
+      <div class="clock-content relative z-10 min-h-[520px] flex flex-col items-center justify-center px-6 pb-16 pt-24 text-center">
         <p class="mb-6 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs text-forest-100">
           提醒起床小助手 · UTC+8
         </p>
@@ -44,7 +54,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <span class="clock-colon text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light leading-none mx-1 sm:mx-2">:</span>
             <span class="clock-main text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light leading-none" data-clock-minutes>--</span>
           </div>
-          <span class="tabular-nums text-2xl sm:text-4xl md:text-5xl font-light text-forest-100/70" data-clock-seconds aria-hidden="true">:--</span>
+          <span class="clock-seconds tabular-nums text-2xl sm:text-4xl md:text-5xl font-light text-forest-100/70" data-clock-seconds aria-hidden="true">:--</span>
         </div>
 
         <p class="mt-8 text-sm sm:text-base text-stone-100/70" data-clock-date>
@@ -64,6 +74,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <h2 class="text-lg font-medium text-stone-800 mb-3">关于这个时间</h2>
         <p class="text-sm text-stone-600 leading-relaxed">
           当前显示为东八区时间，即 UTC+8 / China Standard Time，用来帮助自己关注作息节奏。
+          时钟区域支持全屏显示，适合在桌面或移动设备上作为临时提醒屏幕使用。
         </p>
       </div>
 
@@ -104,6 +115,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     const dateEl = stage.querySelector('[data-clock-date]');
     const readableEl = stage.querySelector('[data-clock-readable]');
     const canvas = stage.querySelector('[data-clock-particles]');
+    const fullscreenButton = stage.querySelector('[data-fullscreen-toggle]');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     let clockTimer = 0;
@@ -111,6 +123,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     let frameId = 0;
     let running = false;
     let lastFrame = 0;
+    let isFallbackFullscreen = false;
+    let originalBodyOverflow = '';
     let particles = [];
 
     function getChinaStandardTime() {
@@ -288,19 +302,134 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       };
     }
 
+    function resizeClockSoon() {
+      window.requestAnimationFrame(() => {
+        window.dispatchEvent(new Event('resize'));
+      });
+    }
+
+    function isNativeFullscreenActive() {
+      return document.fullscreenElement === stage;
+    }
+
+    function updateFullscreenButton() {
+      const isFullscreen = isNativeFullscreenActive() || isFallbackFullscreen;
+      const label = isFullscreen ? '退出全屏' : '进入全屏';
+      const ariaLabel = isFullscreen ? '退出全屏显示' : '进入全屏显示时钟区域';
+
+      stage.classList.toggle('is-native-fullscreen', isNativeFullscreenActive());
+
+      if (fullscreenButton) {
+        fullscreenButton.textContent = label;
+        fullscreenButton.setAttribute('aria-label', ariaLabel);
+        fullscreenButton.setAttribute('aria-pressed', String(isFullscreen));
+      }
+
+      resizeClockSoon();
+    }
+
+    function enterFallbackFullscreen() {
+      if (isFallbackFullscreen) return;
+
+      originalBodyOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      isFallbackFullscreen = true;
+      stage.classList.add('is-fallback-fullscreen');
+      updateFullscreenButton();
+    }
+
+    function exitFallbackFullscreen() {
+      if (!isFallbackFullscreen) return;
+
+      isFallbackFullscreen = false;
+      stage.classList.remove('is-fallback-fullscreen');
+      document.body.style.overflow = originalBodyOverflow;
+      updateFullscreenButton();
+    }
+
+    async function enterFullscreen() {
+      if (stage.requestFullscreen && document.exitFullscreen) {
+        try {
+          await stage.requestFullscreen();
+          updateFullscreenButton();
+          return;
+        } catch {
+          enterFallbackFullscreen();
+          return;
+        }
+      }
+
+      enterFallbackFullscreen();
+    }
+
+    async function exitFullscreen() {
+      if (isNativeFullscreenActive() && document.exitFullscreen) {
+        try {
+          await document.exitFullscreen();
+        } catch {
+          updateFullscreenButton();
+        }
+        return;
+      }
+
+      exitFallbackFullscreen();
+    }
+
+    function toggleFullscreen() {
+      if (isNativeFullscreenActive() || isFallbackFullscreen) {
+        exitFullscreen();
+      } else {
+        enterFullscreen();
+      }
+    }
+
+    function handleFullscreenChange() {
+      if (!document.fullscreenElement && isFallbackFullscreen) {
+        exitFallbackFullscreen();
+        return;
+      }
+
+      updateFullscreenButton();
+    }
+
+    function handleFullscreenKeydown(event) {
+      if (event.key === 'Escape' && isFallbackFullscreen) {
+        exitFallbackFullscreen();
+      }
+    }
+
     const cleanupParticles = setupParticles();
     updateClock();
     clockTimer = window.setInterval(updateClock, 1000);
+
+    if (fullscreenButton) {
+      fullscreenButton.addEventListener('click', toggleFullscreen);
+      updateFullscreenButton();
+    }
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('keydown', handleFullscreenKeydown);
 
     function cleanup() {
       window.clearInterval(clockTimer);
       window.clearTimeout(pulseTimer);
       stage.classList.remove('clock-is-pulsing');
+      exitFallbackFullscreen();
+
+      if (isNativeFullscreenActive() && document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+
+      if (fullscreenButton) {
+        fullscreenButton.removeEventListener('click', toggleFullscreen);
+      }
 
       if (cleanupParticles) {
         cleanupParticles();
       }
 
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('keydown', handleFullscreenKeydown);
       window.removeEventListener('pagehide', cleanup);
       document.removeEventListener('astro:before-swap', cleanup);
     }
@@ -313,6 +442,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 <style>
   .wakeup-particles {
     opacity: 0.7;
+  }
+
+  .fullscreen-toggle {
+    backdrop-filter: blur(8px);
+    touch-action: manipulation;
+  }
+
+  .fullscreen-toggle:focus-visible {
+    outline: 2px solid rgba(216, 235, 225, 0.75);
+    outline-offset: 2px;
   }
 
   .wakeup-clock-stage::before {
@@ -335,7 +474,47 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   .clock-main,
   .clock-colon {
+    font-size: clamp(3rem, 14vw, 9rem);
     text-shadow: 0 12px 36px rgba(16, 42, 67, 0.35);
+  }
+
+  .clock-seconds {
+    font-size: clamp(1.4rem, 4.5vw, 3rem);
+  }
+
+  .wakeup-clock-stage:fullscreen,
+  .wakeup-clock-stage.is-fallback-fullscreen {
+    width: 100vw;
+    height: 100dvh;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: rgba(16, 42, 67, 0.98);
+  }
+
+  .wakeup-clock-stage.is-fallback-fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+  }
+
+  .wakeup-clock-stage:fullscreen .clock-content,
+  .wakeup-clock-stage.is-fallback-fullscreen .clock-content {
+    min-height: 100dvh;
+    width: 100%;
+    padding: clamp(5rem, 9vh, 7rem) 1rem clamp(2rem, 7vh, 5rem);
+  }
+
+  .wakeup-clock-stage:fullscreen .clock-main,
+  .wakeup-clock-stage:fullscreen .clock-colon,
+  .wakeup-clock-stage.is-fallback-fullscreen .clock-main,
+  .wakeup-clock-stage.is-fallback-fullscreen .clock-colon {
+    font-size: clamp(3.25rem, 15vw, 10rem);
+  }
+
+  .wakeup-clock-stage:fullscreen .clock-seconds,
+  .wakeup-clock-stage.is-fallback-fullscreen .clock-seconds {
+    font-size: clamp(1.5rem, 5vw, 3.5rem);
   }
 
   .clock-pulse {
@@ -367,6 +546,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
     .clock-colon {
       animation: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .fullscreen-toggle {
+      right: 0.75rem;
+      top: 0.75rem;
+      min-height: 2.75rem;
+    }
+
+    .clock-content {
+      min-height: 480px;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
   }
 
