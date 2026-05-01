@@ -6,7 +6,26 @@
 
 ## [Unreleased]
 
-*暂无未发布的变更。当前 HEAD 已包含 v0.4.0-article-pages 的所有内容。*
+*暂无未发布的变更。当前工作版本为 v0.4.1-playground-clock。*
+
+---
+
+## [v0.4.1-playground-clock]
+
+发布于 2026-05-01
+
+### Added
+- Added a Playground section for small web experiments.
+- Added Yanqi Lake Clock page at /playground/yanqi-clock/.
+
+### Changed
+- Adapted an external Vite React clock experiment into the current Astro site style.
+- Kept the experiment outside Research, Tutorials, and Ideas to preserve the academic structure of the site.
+
+### Notes
+- The clock intentionally keeps a stylized UTC+11 offset as part of the concept.
+- The UTC+11 offset should not be corrected to UTC+8.
+- The page is an entertainment / front-end experiment and does not represent a research output.
 
 ---
 

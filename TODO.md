@@ -4,6 +4,15 @@
 
 ---
 
+## Recent Updates
+
+- [x] v0.4.1 — Added a low-priority Playground section and Yanqi Lake Clock experiment
+- [x] Playground clock is an entertainment / front-end experiment, not a research output
+
+**说明**：Playground is a low-priority experimental section; the next main task remains first real content article.
+
+---
+
 ## v0.4 Real Content
 
 第一阶段目标：充实真实内容，文章详情页已就绪后，重点是写真正的内容。
@@ -75,3 +84,4 @@
 - [x] v0.3.1 — 页脚访问统计
 - [x] v0.3.2 — 交接文档基线
 - [x] v0.4.0 — 文章详情页（Tutorials / Ideas 动态路由）
+- [x] v0.4.1 — Playground / Yanqi Lake Clock（低优先级前端实验）

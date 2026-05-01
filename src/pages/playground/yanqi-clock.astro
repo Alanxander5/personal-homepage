@@ -1,0 +1,384 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="雁栖湖幻想时间"
+  description="雁栖湖幻想时间 - 一个风格化时钟与粒子背景小实验"
+>
+  <div class="max-w-5xl mx-auto px-6 py-16">
+    <a
+      href="/playground/"
+      class="inline-flex items-center text-sm text-forest-600 hover:text-forest-700 mb-8 transition-colors"
+    >
+      ← 返回 Playground
+    </a>
+
+    <header class="mb-8">
+      <p class="text-sm text-forest-600 font-medium mb-3">Yanqi Lake Clock</p>
+      <h1 class="text-3xl font-semibold text-stone-800 mb-4">雁栖湖幻想时间</h1>
+      <p class="text-stone-600 max-w-2xl leading-relaxed">
+        一个动态时钟与轻微粒子背景的小实验，放在 Playground 中作为前端交互和视觉表达练习。
+      </p>
+    </header>
+
+    <section
+      class="yanqi-clock-stage relative overflow-hidden rounded-2xl border border-forest-100 bg-gradient-to-br from-deepblue-900 via-deepblue-800 to-forest-900 shadow-sm"
+      data-yanqi-clock
+      aria-label="雁栖湖幻想时间时钟"
+    >
+      <canvas
+        class="yanqi-particles absolute inset-0 h-full w-full pointer-events-none"
+        data-clock-particles
+        aria-hidden="true"
+      ></canvas>
+
+      <div class="relative z-10 min-h-[520px] flex flex-col items-center justify-center px-6 py-16 text-center">
+        <p class="mb-6 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs text-forest-100">
+          Conceptual UTC+11 · stylized time
+        </p>
+
+        <div class="clock-face flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 text-stone-50">
+          <div class="flex items-baseline justify-center tabular-nums" aria-hidden="true">
+            <span class="clock-main text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light leading-none" data-clock-hours>--</span>
+            <span class="clock-colon text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light leading-none mx-1 sm:mx-2">:</span>
+            <span class="clock-main text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light leading-none" data-clock-minutes>--</span>
+          </div>
+          <span class="tabular-nums text-2xl sm:text-4xl md:text-5xl font-light text-forest-100/70" data-clock-seconds aria-hidden="true">:--</span>
+        </div>
+
+        <p class="mt-8 text-sm sm:text-base text-stone-100/70" data-clock-date>
+          正在读取时间
+        </p>
+
+        <p class="sr-only" data-clock-readable>
+          雁栖湖幻想时间正在读取
+        </p>
+
+        <div class="clock-pulse mt-12 h-2 w-2 rounded-full bg-forest-100/20" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="mt-8 grid md:grid-cols-[1.4fr_1fr] gap-6">
+      <div class="bg-white rounded-xl border border-stone-200 p-6">
+        <h2 class="text-lg font-medium text-stone-800 mb-3">关于这个时间</h2>
+        <p class="text-sm text-stone-600 leading-relaxed">
+          这是一个风格化时钟小实验，时间偏移为刻意设定，并不代表真实地理时区。
+          UTC+11 是页面概念的一部分，不应被校正为 UTC+8 或中国标准时间。
+        </p>
+      </div>
+
+      <div class="bg-forest-50 rounded-xl border border-forest-100 p-6">
+        <h2 class="text-lg font-medium text-forest-800 mb-3">Playground 说明</h2>
+        <p class="text-sm text-stone-600 leading-relaxed">
+          这个页面是娱乐和前端表达实验，不属于研究成果、教程文章或想法库条目。
+        </p>
+      </div>
+    </section>
+
+    <footer class="mt-12 pt-8 border-t border-stone-200 flex flex-wrap gap-4">
+      <a
+        href="/playground/"
+        class="inline-flex items-center text-sm text-forest-600 hover:text-forest-700 transition-colors"
+      >
+        ← 返回 Playground
+      </a>
+      <a
+        href="/"
+        class="inline-flex items-center text-sm text-stone-500 hover:text-stone-700 transition-colors"
+      >
+        ← 返回首页
+      </a>
+    </footer>
+  </div>
+</BaseLayout>
+
+<script>
+  const stage = document.querySelector('[data-yanqi-clock]');
+
+  if (stage) {
+    const UTC_OFFSET_HOURS = 11;
+    const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+    const hoursEl = stage.querySelector('[data-clock-hours]');
+    const minutesEl = stage.querySelector('[data-clock-minutes]');
+    const secondsEl = stage.querySelector('[data-clock-seconds]');
+    const dateEl = stage.querySelector('[data-clock-date]');
+    const readableEl = stage.querySelector('[data-clock-readable]');
+    const canvas = stage.querySelector('[data-clock-particles]');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    let clockTimer = 0;
+    let pulseTimer = 0;
+    let frameId = 0;
+    let running = false;
+    let lastFrame = 0;
+    let particles = [];
+
+    function getConceptualTime() {
+      const now = new Date();
+      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+      return new Date(utc + UTC_OFFSET_HOURS * 3600000);
+    }
+
+    function pad(value) {
+      return String(value).padStart(2, '0');
+    }
+
+    function updateClock() {
+      const time = getConceptualTime();
+      const hours = pad(time.getHours());
+      const minutes = pad(time.getMinutes());
+      const seconds = pad(time.getSeconds());
+      const dateText = `${time.getFullYear()}年${time.getMonth() + 1}月${time.getDate()}日 ${weekdays[time.getDay()]}`;
+      const readableText = `雁栖湖幻想时间 ${hours}点${minutes}分${seconds}秒，${dateText}`;
+
+      if (hoursEl) hoursEl.textContent = hours;
+      if (minutesEl) minutesEl.textContent = minutes;
+      if (secondsEl) secondsEl.textContent = `:${seconds}`;
+      if (dateEl) dateEl.textContent = dateText;
+      if (readableEl) readableEl.textContent = readableText;
+
+      window.clearTimeout(pulseTimer);
+      stage.classList.remove('clock-is-pulsing');
+
+      if (!reducedMotion.matches) {
+        stage.classList.add('clock-is-pulsing');
+        pulseTimer = window.setTimeout(() => {
+          stage.classList.remove('clock-is-pulsing');
+        }, 240);
+      }
+    }
+
+    function setupParticles() {
+      if (!(canvas instanceof HTMLCanvasElement)) return;
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      function getSize() {
+        const rect = canvas.getBoundingClientRect();
+        return {
+          width: Math.max(1, rect.width),
+          height: Math.max(1, rect.height),
+        };
+      }
+
+      function createParticle(initial) {
+        const { width, height } = getSize();
+        return {
+          x: Math.random() * width,
+          y: initial ? Math.random() * height : height + Math.random() * 24,
+          size: 1 + Math.random() * 1.4,
+          speedY: 0.06 + Math.random() * 0.12,
+          swing: 0.25 + Math.random() * 0.55,
+          swingSpeed: 0.004 + Math.random() * 0.008,
+          swingOffset: Math.random() * Math.PI * 2,
+          opacity: 0.05 + Math.random() * 0.1,
+        };
+      }
+
+      function particleCount() {
+        if (reducedMotion.matches) return 10;
+        return window.innerWidth < 640 ? 22 : 42;
+      }
+
+      function resizeCanvas() {
+        const { width, height } = getSize();
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        particles = Array.from({ length: particleCount() }, () => createParticle(true));
+        drawParticles();
+      }
+
+      function updateParticles() {
+        const { height } = getSize();
+        particles.forEach((particle) => {
+          particle.y -= particle.speedY;
+          particle.swingOffset += particle.swingSpeed;
+
+          if (particle.y < -12) {
+            Object.assign(particle, createParticle(false));
+          }
+        });
+
+        if (particles.length > particleCount()) {
+          particles = particles.slice(0, particleCount());
+        } else {
+          while (particles.length < particleCount()) {
+            particles.push(createParticle(true));
+          }
+        }
+
+        particles.forEach((particle) => {
+          if (particle.y > height + 40) {
+            particle.y = height + Math.random() * 24;
+          }
+        });
+      }
+
+      function drawParticles() {
+        const { width, height } = getSize();
+        ctx.clearRect(0, 0, width, height);
+
+        particles.forEach((particle) => {
+          const x = particle.x + Math.sin(particle.swingOffset) * particle.swing;
+          ctx.beginPath();
+          ctx.arc(x, particle.y, particle.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(216, 235, 225, ${particle.opacity})`;
+          ctx.fill();
+        });
+      }
+
+      function loop(timestamp) {
+        if (!running) return;
+
+        if (timestamp - lastFrame > 33) {
+          updateParticles();
+          drawParticles();
+          lastFrame = timestamp;
+        }
+
+        frameId = window.requestAnimationFrame(loop);
+      }
+
+      function stopAnimation() {
+        running = false;
+        window.cancelAnimationFrame(frameId);
+      }
+
+      function startAnimation() {
+        stopAnimation();
+        drawParticles();
+
+        if (reducedMotion.matches || document.hidden) {
+          return;
+        }
+
+        running = true;
+        lastFrame = 0;
+        frameId = window.requestAnimationFrame(loop);
+      }
+
+      function handleVisibility() {
+        if (document.hidden) {
+          stopAnimation();
+        } else {
+          startAnimation();
+        }
+      }
+
+      function handleMotionChange() {
+        resizeCanvas();
+        startAnimation();
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      document.addEventListener('visibilitychange', handleVisibility);
+      reducedMotion.addEventListener('change', handleMotionChange);
+
+      resizeCanvas();
+      startAnimation();
+
+      return () => {
+        stopAnimation();
+        window.removeEventListener('resize', resizeCanvas);
+        document.removeEventListener('visibilitychange', handleVisibility);
+        reducedMotion.removeEventListener('change', handleMotionChange);
+      };
+    }
+
+    const cleanupParticles = setupParticles();
+    updateClock();
+    clockTimer = window.setInterval(updateClock, 1000);
+
+    function cleanup() {
+      window.clearInterval(clockTimer);
+      window.clearTimeout(pulseTimer);
+      stage.classList.remove('clock-is-pulsing');
+
+      if (cleanupParticles) {
+        cleanupParticles();
+      }
+
+      window.removeEventListener('pagehide', cleanup);
+      document.removeEventListener('astro:before-swap', cleanup);
+    }
+
+    window.addEventListener('pagehide', cleanup);
+    document.addEventListener('astro:before-swap', cleanup);
+  }
+</script>
+
+<style>
+  .yanqi-particles {
+    opacity: 0.7;
+  }
+
+  .yanqi-clock-stage::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(216, 235, 225, 0.16), transparent 28%),
+      radial-gradient(circle at 80% 70%, rgba(240, 247, 244, 0.12), transparent 26%);
+    pointer-events: none;
+  }
+
+  .yanqi-clock-stage::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(16, 42, 67, 0.1), rgba(15, 42, 31, 0.26));
+    pointer-events: none;
+  }
+
+  .clock-main,
+  .clock-colon {
+    text-shadow: 0 12px 36px rgba(16, 42, 67, 0.35);
+  }
+
+  .clock-pulse {
+    transition:
+      transform 240ms ease,
+      background-color 240ms ease,
+      opacity 240ms ease;
+  }
+
+  .clock-is-pulsing .clock-pulse {
+    transform: scale(1.45);
+    background-color: rgba(216, 235, 225, 0.5);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .clock-colon {
+      animation: yanqi-breathe 2.4s ease-in-out infinite;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .yanqi-particles {
+      opacity: 0.25;
+    }
+
+    .clock-pulse {
+      display: none;
+    }
+
+    .clock-colon {
+      animation: none;
+    }
+  }
+
+  @keyframes yanqi-breathe {
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.45;
+    }
+  }
+</style>

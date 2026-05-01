@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Playground"
+  description="Playground - 小型网页试验与前端表达实验"
+>
+  <div class="max-w-5xl mx-auto px-6 py-16">
+    <header class="mb-12">
+      <p class="text-sm text-forest-600 font-medium mb-3">Playground</p>
+      <h1 class="text-3xl font-semibold text-stone-800 mb-4">小型网页试验</h1>
+      <p class="text-stone-600 max-w-2xl leading-relaxed">
+        这里放一些与科研主页无直接关系的小型网页试验。它们主要用于测试前端交互、视觉风格和个人表达。
+      </p>
+    </header>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <a href="/playground/yanqi-clock/" class="block group">
+        <article class="bg-white rounded-xl border border-stone-200 p-6 hover:border-forest-200 hover:shadow-md transition-all h-full">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-forest-50 text-forest-600 flex items-center justify-center text-lg">
+              ◷
+            </span>
+            <div>
+              <h2 class="text-xl font-medium text-stone-800 group-hover:text-forest-600 transition-colors mb-2">
+                雁栖湖幻想时间
+              </h2>
+              <p class="text-stone-600 leading-relaxed">
+                一个动态时钟与粒子背景的小实验，统一到本站的生态计算视觉风格。
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2 py-0.5 bg-forest-50 text-forest-600 rounded text-xs">
+              Front-end experiment
+            </span>
+            <span class="px-2 py-0.5 bg-deepblue-50 text-deepblue-600 rounded text-xs">
+              Stylized clock
+            </span>
+          </div>
+        </article>
+      </a>
+    </div>
+
+    <section class="mt-12 bg-stone-100 rounded-xl p-6">
+      <p class="text-sm text-stone-600 leading-relaxed">
+        <span class="font-medium text-stone-700">说明：</span>
+        Playground 内容不代表科研成果，只是前端与表达方式的小实验。主页的主要重心仍然是研究记录、教程笔记和真实内容积累。
+      </p>
+    </section>
+  </div>
+</BaseLayout>

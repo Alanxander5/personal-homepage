@@ -5,10 +5,10 @@
 - **项目名称**: personal-homepage
 - **线上地址**: https://lab.xiaolan.monster/
 - **GitHub 仓库**: https://github.com/Alanxander5/personal-homepage
-- **当前版本**: v0.4.0-article-pages
-- **最后更新**: 2026-04-28
-- **npm version**: `0.4.0-article-pages` (package.json uses npm-compatible semver string)
-- **Git tag**: `v0.4.0-article-pages`
+- **当前版本**: v0.4.1-playground-clock
+- **最后更新**: 2026-05-01
+- **npm version**: `0.4.1-playground-clock` (package.json uses npm-compatible semver string)
+- **Git tag**: not created in this working tree
 
 ## 技术栈
 
@@ -42,6 +42,7 @@
 4. ✅ Tutorials 和 Ideas 迁移为 Content Collections (v0.3)
 5. ✅ 页脚访问统计小栏 (v0.3.1)
 6. ✅ Tutorials 和 Ideas 动态详情页 (v0.4)
+7. ✅ Playground / Yanqi Lake Clock 小实验 (v0.4.1)
 
 ## 当前页面结构
 
@@ -55,6 +56,15 @@
 | 想法库 | `src/pages/ideas.astro` | 从 Content Collections 读取，卡片可点击 |
 | 想法详情 | `src/pages/ideas/[slug].astro` | 动态路由，渲染 MDX 正文 |
 | 当前状态 | `src/pages/now.astro` | Q2 工作重点 |
+| Playground | `src/pages/playground.astro` | 低风险小型网页试验区 |
+| Yanqi Lake Clock | `src/pages/playground/yanqi-clock.astro` | 风格化时钟与弱粒子背景实验 |
+
+## Playground 说明
+
+- Playground 是低风险试验区，用于放置与科研主页无直接关系的小型前端实验
+- Playground 内容不代表科研成果，不应包装成 Research / Tutorials / Ideas 内容
+- Yanqi Lake Clock 的 UTC+11 是刻意的风格化时间设定，不是 bug
+- 不要把 Yanqi Clock 的 UTC+11 改成 UTC+8 或 China Standard Time
 
 ## 当前内容系统结构
 
@@ -89,9 +99,8 @@
 ## 下一阶段建议任务
 
 1. **v0.4 Real Content**: 写第一篇真正的教程文章和想法库文章
-2. **v0.5 Article Detail Pages**: 为 Tutorials 和 Ideas 添加详情页，支持独立文章 URL
-3. **v0.6 Search**: 当文章数量达到 8-10 篇后再接入 Pagefind
-4. **v0.7 Interaction**: 视访问量决定是否接入 Giscus
+2. **v0.5 Search**: 当文章数量达到 8-10 篇后再接入 Pagefind
+3. **v0.6 Interaction**: 视访问量决定是否接入 Giscus
 
 ## 当前风险与注意事项
 
@@ -101,6 +110,8 @@
 - ❌ **不要把主页写成课题组官网风格** — 保持克制和个人化
 - ❌ **内容不足时不要急于添加 Pagefind / Giscus / 多语言** — 等内容积累到一定量再做
 - ❌ **不要添加 RSS / 复杂动画 / D3 图谱** — 当前阶段不需要
+- ❌ **不要让 Playground 页面污染主站全局样式** — 小实验必须局部封装
+- ❌ **不要把 Playground 内容包装成科研成果** — 它只是低优先级前端实验区
 
 ## 访问统计 API
 
