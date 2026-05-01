@@ -6,26 +6,26 @@
 
 ## [Unreleased]
 
-*暂无未发布的变更。当前工作版本为 v0.4.1-playground-clock。*
+*暂无未发布的变更。当前工作版本为 v0.4.1-wakeup-helper。*
 
 ---
 
-## [v0.4.1-playground-clock]
+## [v0.4.1-wakeup-helper]
 
 发布于 2026-05-01
 
 ### Added
 - Added a Playground section for small web experiments.
-- Added Yanqi Lake Clock page at /playground/yanqi-clock/.
+- Added a wake-up reminder helper page at /playground/yanqi-clock/.
 
 ### Changed
-- Adapted an external Vite React clock experiment into the current Astro site style.
-- Kept the experiment outside Research, Tutorials, and Ideas to preserve the academic structure of the site.
+- Adapted the previous clock experiment into a wake-up reminder helper.
+- Updated page naming from Yanqi Lake Clock to 提醒起床小助手.
+- Updated the displayed time logic to China Standard Time / UTC+8.
 
 ### Notes
-- The clock intentionally keeps a stylized UTC+11 offset as part of the concept.
-- The UTC+11 offset should not be corrected to UTC+8.
-- The page is an entertainment / front-end experiment and does not represent a research output.
+- The page remains outside Research, Tutorials, and Ideas.
+- The next main task remains real content writing, not frontend experiments.
 
 ---
 

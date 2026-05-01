@@ -3,8 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="雁栖湖幻想时间"
-  description="雁栖湖幻想时间 - 一个风格化时钟与粒子背景小实验"
+  title="提醒起床小助手"
+  description="提醒起床小助手 - 一个规律作息提醒与动态时钟小实验"
 >
   <div class="max-w-5xl mx-auto px-6 py-16">
     <a
@@ -15,27 +15,27 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </a>
 
     <header class="mb-8">
-      <p class="text-sm text-forest-600 font-medium mb-3">Yanqi Lake Clock</p>
-      <h1 class="text-3xl font-semibold text-stone-800 mb-4">雁栖湖幻想时间</h1>
+      <p class="text-sm text-forest-600 font-medium mb-3">提醒起床小助手</p>
+      <h1 class="text-3xl font-semibold text-stone-800 mb-4">提醒起床小助手</h1>
       <p class="text-stone-600 max-w-2xl leading-relaxed">
-        一个动态时钟与轻微粒子背景的小实验，放在 Playground 中作为前端交互和视觉表达练习。
+        一个用于提醒自己规律作息和按时起床的小实验页面，保留动态时钟与轻微粒子背景。
       </p>
     </header>
 
     <section
-      class="yanqi-clock-stage relative overflow-hidden rounded-2xl border border-forest-100 bg-gradient-to-br from-deepblue-900 via-deepblue-800 to-forest-900 shadow-sm"
-      data-yanqi-clock
-      aria-label="雁栖湖幻想时间时钟"
+      class="wakeup-clock-stage relative overflow-hidden rounded-2xl border border-forest-100 bg-gradient-to-br from-deepblue-900 via-deepblue-800 to-forest-900 shadow-sm"
+      data-wakeup-clock
+      aria-label="提醒起床小助手时钟"
     >
       <canvas
-        class="yanqi-particles absolute inset-0 h-full w-full pointer-events-none"
+        class="wakeup-particles absolute inset-0 h-full w-full pointer-events-none"
         data-clock-particles
         aria-hidden="true"
       ></canvas>
 
       <div class="relative z-10 min-h-[520px] flex flex-col items-center justify-center px-6 py-16 text-center">
         <p class="mb-6 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs text-forest-100">
-          Conceptual UTC+11 · stylized time
+          提醒起床小助手 · UTC+8
         </p>
 
         <div class="clock-face flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 text-stone-50">
@@ -52,7 +52,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </p>
 
         <p class="sr-only" data-clock-readable>
-          雁栖湖幻想时间正在读取
+          提醒起床小助手正在读取
         </p>
 
         <div class="clock-pulse mt-12 h-2 w-2 rounded-full bg-forest-100/20" aria-hidden="true"></div>
@@ -63,8 +63,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div class="bg-white rounded-xl border border-stone-200 p-6">
         <h2 class="text-lg font-medium text-stone-800 mb-3">关于这个时间</h2>
         <p class="text-sm text-stone-600 leading-relaxed">
-          这是一个风格化时钟小实验，时间偏移为刻意设定，并不代表真实地理时区。
-          UTC+11 是页面概念的一部分，不应被校正为 UTC+8 或中国标准时间。
+          当前显示为东八区时间，即 UTC+8 / China Standard Time，用来帮助自己关注作息节奏。
         </p>
       </div>
 
@@ -94,10 +93,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <script>
-  const stage = document.querySelector('[data-yanqi-clock]');
+  const stage = document.querySelector('[data-wakeup-clock]');
 
   if (stage) {
-    const UTC_OFFSET_HOURS = 11;
+    const UTC_OFFSET_HOURS = 8;
     const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
     const hoursEl = stage.querySelector('[data-clock-hours]');
     const minutesEl = stage.querySelector('[data-clock-minutes]');
@@ -114,7 +113,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     let lastFrame = 0;
     let particles = [];
 
-    function getConceptualTime() {
+    function getChinaStandardTime() {
       const now = new Date();
       const utc = now.getTime() + now.getTimezoneOffset() * 60000;
       return new Date(utc + UTC_OFFSET_HOURS * 3600000);
@@ -125,12 +124,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
 
     function updateClock() {
-      const time = getConceptualTime();
+      const time = getChinaStandardTime();
       const hours = pad(time.getHours());
       const minutes = pad(time.getMinutes());
       const seconds = pad(time.getSeconds());
       const dateText = `${time.getFullYear()}年${time.getMonth() + 1}月${time.getDate()}日 ${weekdays[time.getDay()]}`;
-      const readableText = `雁栖湖幻想时间 ${hours}点${minutes}分${seconds}秒，${dateText}`;
+      const readableText = `提醒起床小助手 ${hours}点${minutes}分${seconds}秒，${dateText}`;
 
       if (hoursEl) hoursEl.textContent = hours;
       if (minutesEl) minutesEl.textContent = minutes;
@@ -312,11 +311,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 </script>
 
 <style>
-  .yanqi-particles {
+  .wakeup-particles {
     opacity: 0.7;
   }
 
-  .yanqi-clock-stage::before {
+  .wakeup-clock-stage::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -326,7 +325,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     pointer-events: none;
   }
 
-  .yanqi-clock-stage::after {
+  .wakeup-clock-stage::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -353,12 +352,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   @media (prefers-reduced-motion: no-preference) {
     .clock-colon {
-      animation: yanqi-breathe 2.4s ease-in-out infinite;
+      animation: wakeup-breathe 2.4s ease-in-out infinite;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .yanqi-particles {
+    .wakeup-particles {
       opacity: 0.25;
     }
 
@@ -371,7 +370,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
   }
 
-  @keyframes yanqi-breathe {
+  @keyframes wakeup-breathe {
     0%,
     100% {
       opacity: 1;

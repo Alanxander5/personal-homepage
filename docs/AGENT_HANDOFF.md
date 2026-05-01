@@ -39,7 +39,7 @@ npm run build
 11. `src/pages/tutorials/[slug].astro` — Tutorials 详情页路由
 12. `src/pages/ideas/[slug].astro` — Ideas 详情页路由
 13. `src/pages/playground.astro` — Playground 列表页
-14. `src/pages/playground/yanqi-clock.astro` — Yanqi Lake Clock 小实验页
+14. `src/pages/playground/yanqi-clock.astro` — 提醒起床小助手页面
 
 ## 新 Agent 接手后必须运行的命令
 
@@ -95,7 +95,7 @@ npm run dev
 | 大重构工程结构 | 当前结构已满足需求 |
 | 让 Playground 页面污染主站全局样式 | 小实验必须局部封装，不应改全站 body 样式 |
 | 把 Playground 内容包装成科研成果 | Playground 是低优先级前端实验区 |
-| 把 Yanqi Clock 的 UTC+11 改成 UTC+8 | UTC+11 是刻意的风格化时间设定，不是时区 bug |
+| 修改提醒起床小助手时区前不确认需求 | 提醒起床小助手当前使用 UTC+8 / China Standard Time |
 
 ## 推荐任务流程
 
